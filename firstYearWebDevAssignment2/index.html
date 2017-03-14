@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hire Me</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css"/><!--Referencing external stylesheet-->
+
+
+
+  <!-- FONT - taken from google fonts - https://www.google.com/fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+	
+</head>
+
+<body>
+
+<header>
+<div class="navigation">
+<nav>
+  <ul>
+    <li><a href="#hireMe">HIRE ME</a></li><!--Creating links to different sections of the page. IDhireMe section-->
+    <li><a href="#previousWork">PREVIOUS WORK</a></li><!--Creating links to different sections of the page. IDpreviousWork section-->
+    <li><a href="#contact">CONTACT</a></li><!--Creating links to different sections of the page. IDcontact section-->
+  </ul>
+</nav>
+</div>
+</header>
+
+
+<div class="container">
+  <a id="hireMe"></a><!--Creating an id for hireMe to create links to this section-->
+   <h1>Hire Me</h1>
+   <div class="row">
+    <div class="four columns"/>
+      <img src="img/me.jpg" alt="Me" class="me"/>
+    </div><!--End class=" five columns"-->
+    <div class="eight columns"/>
+      <p>Hello, my name is Natalie Chappelhow and I am a first year student at UCLAN where I am studying Web Design and Development.</p>
+	    <p>These are skills that I have :</p>
+	    <p id ="skills"></p><!--This displays the skills that are defined in the skills array-->
+     </div><!--End class="seven columns-->
+  </div><!--End class="row"-->
+
+  <div class="clear"></div>
+
+
+
+  <a id="previousWork"></a><!--Creating an id for previousWork to create links to this section-->
+    
+    <h3>Previous Work</h3>
+    <p>Here are some examples of my previous work</p>
+
+    <h4>Websites</h4>
+    <p>This is a website that I made when I was working as an apprentice at A.W.Jenkinson Forest Products:</p>
+    <p>Please click on the image to be taken to the website.</p>
+    <a href="http://www.berite.co.uk/index.php" target="_blank"> <!--I looked on w3schools (http://www.w3schools.com/html/html_images.asp) on how to have an image as a link in HTML-->
+      <img class="examples" src="img/berite.jpg" alt="Berite Website" >
+    </a>    
+
+    <p>This is a website that I have made for a games designer to show off their games:</p>
+    <p>Please click on the image to be taken to the website.</p>
+    <a href="http://penguin.uclan.ac.uk/~njchappelhow/monicaColeSimonetta/" target="_blank"> <!--I looked on w3schools (http://www.w3schools.com/html/html_images.asp) on how to have an image as a link in HTML-->
+     <img class="examples" src="img/webDesAssignment2.jpg" alt="Web Design Assignment 2" >
+    </a>   
+
+    <p>This is a website that I created to show off my work that I did for my first Web Development assignment:</p>
+    <p>Please click on the image to be taken to the website.</p>
+    <a href="http://penguin.uclan.ac.uk/~njchappelhow/webDev1/farmyard.html" target="_blank"> <!--I looked on w3schools (http://www.w3schools.com/html/html_images.asp) on how to have an image as a link in HTML-->
+      <img class="examples" src="img/webDevAssignment1.jpg" alt="Web Development Assignment 1" >
+    </a>    
+
+
+     
+
+  <h4>Photshop Work</h4>
+  <img class="photoshop" src="img/graphicsAssignment2.jpg" alt="An example piece of Photoshop work">
+  <img class="photoshop" src="img/celebritySilhouette.jpg" alt="An example piece of Photoshop work">
+	<img class="photoshop" src="img/compositeImages.jpg" alt="An example piece of Photoshop work">
+
+   
+  <a id="contact"></a><!--Creating an id for contact to create links to this section-->
+	 <div class="contactForm"><!--Start class="contactForm"-->
+	   <h2>Contact Form</h2>
+  <!--Start Form-->
+  <form action="#"><!--Setting an action for the contactForm. y putting a # makes the user able to sumbit the form but it does not go anywhere. Referenced from http://www.w3schools.com/tags/att_form_action.asp-->
+    <div class="row"><!--Start class="row"-->
+      <div class="six columns"><!--Start class="six columns-->
+        <label for="name">Your Name</label>
+        <input class="u-full-width" placeholder="Your Name" id="name" name="name" type="text" onblur="noEmptyField(document.getElementById('name'), 'Please Enter Your Name')" required/> <!--This is a required field so something needs to be typed into the box otherwise it will be flagged up. This code is from http://www.tizag.com/javascriptT/javascriptform.php a website tutorial about form validation-->
+      </div> <!--End class="six columns"-->
+      <div class="six columns"><!--Start class="six columns"-->
+        <label for="email">Email Address</label>
+        <input class="u-full-width" placeholder="example@mail.com" id="email" type="email" onblur="emailValidation(document.getElementById('email'), 'Please Enter A Valid Email Address')" email required />  <!--This is a required field so something needs to be typed into the box otherwise it will be flagged up. This code is from http://www.tizag.com/javascriptT/javascriptform.php a website tutorial about form validation-->
+      </div> <!--End class="six columns"-->
+    </div> <!--End class="row"-->
+
+     <label for="subject">Subject</label>
+     <input class="u-full-width" placeholder="Subject" id="subject" type="text"/>
+  
+      <label for="message">Message</label>
+      <textarea class="u-full-width" placeholder="Enter your message here" id="message"></textarea>
+
+     <label for="hire">Please tick if you would like to hire me</label>
+     <input type="checkbox" id="hire" name="hire"/>
+      
+      <div class="clear"></div>
+  
+    <input class="button-primary" value="Submit" type="submit"/> 
+  
+  <!-- When a user tabs from one of the required field boxes but does not enter any information into those boxes an error message will appear to ask the user to enter information into these boxes. This is becuase there are validation rules on the 'name' field to see if that there have been any characters entered and th 'email' field has a validation rule to check that a correct email address has been entered when certain criteria have been met-->
+
+  </form>  <!--End Form-->
+  </div><!--End contactForm-->
+	
+
+
+
+  <!--Start hireFrom-->
+<div class="hireForm">
+  <h2>Hire Form</h2>
+  <!--Start Form-->
+  <form><!--Setting an action for the contactForm. y putting a # makes the user able to sumbit the form but it does not go anywhere. Referenced from http://www.w3schools.com/tags/att_form_action.asp-->
+ <div class="row"><!--Start class="row"-->
+    <div class="six columns"><!--Start class="six columns"-->
+      <label for="phoneNumber">Telephone Number</label>
+      <input class="u-full-width" id="restrict" type="text"  onblur="restrictLength(document.getElementById('restrict'), 1, 11)"/><!--This code is from http://www.tizag.com/javascriptT/javascriptform.php a website tutorial about form validation-->
+    </div> <!--End class="six columns"-->
+    <div class="six columns"><!--Start class="six columns"-->
+      <label for="mobileNumber">Mobile Number</label>
+      <input class="u-full-width" id="restrict" type="text" onblur="restrictLength(document.getElementById('restrict'), 1, 11)"/>
+    </div> <!--End class="six columns"-->
+  </div> <!--End class="row"-->
+
+  <label for="days">How many days to hire</label>
+    <div class="row">
+      <div class="six columns">
+       <input class="u-full-width" id="days" name="days" type="number" min="1" value="1"/>
+      </div><!--End class="six columns"-->
+
+
+  <select name="skill" id ="skill">
+    <option value="html">HTML</option>
+    <option value="css">CSS</option>
+    <option value="javascript">JavaScript</option>
+    <option value="jquery">JQuery</option>
+    <option value="illustratorPhotoshop">Illustrator and/or Photoshop</option>
+  </select>
+
+
+  <p id="hireTotal"></p>
+
+
+
+	<!--<input class="button-primary" value="Submit" type="submit" onclick="costOfHire()"/>-->
+
+  <button onclick="costOfHire()">Press to work out the cost of hire</button>
+
+<!-- When a user tabs from one of the required field boxes but does not enter any numbers into those boxes an error message will appear to ask the user to enter numbers into these boxes. This is becuase there are validation rules on the 'phoneNumber' and 'mobileNumber' fields to restrict the numbers of characters that can be inputted into the box. If the amount of mubers entered matches the validation rule then the user is able to tab from box to box-->
+
+</form> 
+<!--End Form-->
+
+</div><!--End class="hireForm"-->
+	
+
+<script type ="text/javascript" src="javascript/javascript.js"/> </script><!--Referencing external javascript file-->
+
+</div><!--End class="container-->
+
+</body><!--End Body Section-->
+</html><!--End HTML. End Webpage-->

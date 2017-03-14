@@ -1,0 +1,84 @@
+<!DOCTYPE html><!--DOCTYPE is an instruction to web browsers to tell thhem what version of HTML the webpage is written in-->
+<html lang="en"><!--Sets the language of the webpage to English-->
+<head><!--Start head section. Where metadata goes-->
+  <meta charset="utf-8"><!--Specifies the character encoding of the document-->
+  <title>Games Design</title>
+  <meta name="description" content="Games Website">
+  <meta name="author" content="Natalie Chappelhow">
+
+  <!-- FONT - taken from google fonts - https://www.google.com/fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+ 
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+  <!-- CSS - Linking the stylesheets
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+
+</head> <!--End head section-->
+
+<body><!--Start body section-->
+
+  <header><!--Start header section-->
+  
+  <div class="title">
+    <h1>Monica Cole-Simonetta</h1>
+  </div>
+    <nav> 
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="platformGame.html">PLATFORM GAME</a></li>
+        <li><a href="topDownGame.html">TOP DOWN GAME</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+    </nav>
+  <div class="clear"></div><!--This is used to clear the float which has been assigned to the nav through css. If this clear was not set then the class="container" and other eloements following the nav appear alongside the nav element-->
+ </header><!--End header section-->
+
+
+
+
+<div class="container"><!--Start class="container"-->
+<img class"characterBar" src="img/characterBar.jpg" alt="Character Bar"><!--Linking the character bar image from the img folder-->
+  
+ <!-- Reference http://getskeleton.com/ for the layout of the contactForm section-->
+  <div class="contactForm"><!--Creating a section for the contactForm-->
+  <a id="contact"></a><!--Creating an id for contact to create links to this section-->
+   <h2>Contact Form</h2>
+   <p>If you have any questions to ask Monica then please feel free to fill in the form below and she will try to answer as quickly as possible.</p>
+    <!--Start Form-->
+    <form action="#"><!--Setting an action for the contactForm. By putting a # makes the user able to sumbit the form but it does not go anywhere. Referenced from http://www.w3schools.com/tags/att_form_action.asp-->
+    <div class="row"><!--Start class="row"-->
+      <div class="six columns"><!--Start class="six columns"-->
+       <label for="name">Your Name</label>
+       <input class="u-full-width" placeholder="Your Name" id="name" type="text"/><!--Creating a text input box for the user's name. A placeholder is used so that the user is reminded to what needs to be put in the box-->
+     </div> <!--End class="six columns"-->
+     <div class="six columns"><!--Start class="six columns"-->
+        <label for="email">Your Email</label>
+        <input class="u-full-width" placeholder="example@mail.com" id="email" type="email"/><!--Creating a text input box for the user's email address. A placeholder is used so that the user is reminded to what needs to be put in the box-->
+      </div> <!--End class="six columns"-->
+    </div> <!--End class="row"-->
+
+    <label for="subject">Subject</label>
+    <input class="u-full-width" placeholder="Subject" id="subject" type="text"/><!--Creating a text input box for the subject. A placeholder is used so that the user is reminded to what needs to be put in the box-->
+  
+    <label for="message">Message</label>
+    <textarea class="u-full-width" placeholder="" id="message"/></textarea>
+    <input class="button-primary" value="Submit" type="submit"/><!--Creating a text  box for the user to type in their message-->
+    </form> 
+    <!--End Form-->
+
+  </div><!--End class="contactForm"-->
+</div> <!--End class="container"-->
+
+
+<footer><!--Start Footer-->
+  <p class="footerText1">Games designed and created by Monica Cole-Simonetta 2016</p>
+  <p class="footerText2">Website designed and created by Natalie Chappelhow 2016</p>
+</footer><!--End Footer-->
+
+
+</body><!--End Body Section-->
+</html><!--End HTML. End Webpage-->

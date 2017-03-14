@@ -1,0 +1,67 @@
+<!DOCTYPE html><!--DOCTYPE is an instruction to web browsers to tell thhem what version of HTML the webpage is written in-->
+<html lang="en"><!--Sets the language of the webpage to English-->
+<head><!--Start head section. Where metadata goes-->
+  <meta charset="utf-8"><!--Specifies the character encoding of the document-->
+  <title>Games Design</title>
+  <meta name="description" content="Games Website">
+  <meta name="author" content="Natalie Chappelhow">
+
+  <!-- FONT - taken from google fonts - https://www.google.com/fonts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+  <!-- CSS - Linking the stylesheets
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+
+</head> <!--End head section-->
+
+<body><!--Start body section-->
+
+  <header><!--Start header section-->
+  
+  <div class="title">
+    <h1>Monica Cole-Simonetta</h1>
+  </div>
+    <nav> 
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="platformGame.html">PLATFORM GAME</a></li>
+        <li><a href="topDownGame.html">TOP DOWN GAME</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+    </nav>
+  <div class="clear"></div><!--This is used to clear the float which has been assigned to the nav through css. If this clear was not set then the class="container" and other eloements following the nav appear alongside the nav element-->
+ </header><!--End header section-->
+
+
+
+
+<div class="container"><!--Start class="container"-->
+<img class"characterBar" src="img/characterBar.jpg" alt="Character Bar"><!--Linking the character bar image from the img folder-->
+ 
+   <h2>Top Down Game</h2>
+       <div class="row"><!--Start class="row"-->
+        <p>The aim of this game is to shoot as many of the birds as possible without being hit by them. To do this the turtle uses its special bird killing stones.</p>
+        <p>To play the game you need to use the arrow keys to move the turtle around the screen. To fire the special stones you need to use the left hand click of the mouse.</p>
+        <p>A counter is present on the screen so you can keep up to date with your score and compare with friends.</p>
+        <p>This is an addictive game so once you have been hit at, you instantly want to play again to better any previous scores.</p>
+        <p>Have fun trying to Burst a Bird!</p>
+       </div> <!--End class="row"-->  
+      <iframe src="game/exportedTopDown/index.html" id="topDownGame"/>
+      </iframe><!--Referenced from http://www.w3schools.com/tags/tag_iframe.asp. An iframe is used to embed another document within this HTML document - in this instance the client's game-->
+
+  </div> <!--End class="games"-->
+
+<div class="clear"></div><!--End class="clear"-->
+
+<footer><!--Start Footer-->
+  <p class="footerText1">Games designed and created by Monica Cole-Simonetta 2016</p>
+  <p class="footerText2">Website designed and created by Natalie Chappelhow 2016</p>
+</footer><!--End Footer-->
+
+
+</body><!--End Body Section-->
+</html><!--End HTML. End Webpage-->
