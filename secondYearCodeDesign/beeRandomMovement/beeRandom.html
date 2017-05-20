@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Bee Random Movement</title>
+	<link rel="stylesheet" type="text/css" href="reset.css">
+	<style type="text/css">
+		body{padding:0%; margin:0%;}
+		canvas {background: url('hiveTotal.svg');
+		background-size: 100% 100%;  
+		background-repeat: no-repeat;
+	}
+	</style>
+
+	<script type="text/javascript">
+
+		var beesTotal = 0;//creating a variable called beesTotal
+		var bees = {"total":0,};//creating a variable called bees
+		//These variables are being used in the bees array
+
+		window.onload = function (){//creating a 'window.onload' function so the JavaScript code will be ran once the page has been loaded
+
+			var canvas = document.getElementById('bee');
+			var ctx = canvas.getContext('2d');
+
+			canvas.height = canvas.width / 1.4;//using this calculation to draw the bee to the correct proportion so it is not squished or stretched
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+
+
+			//Used https://www.w3schools.com/js/js_properties.asp to look at the syntax for adding multiple properties to a variable
+			function newBeeFunction(){//creating a function called 'newBeeFunction'. In this function an array is being created to hold all the values for the bees - https://www.w3schools.com/js/js_arrays.asp was used to look at how to create an array
+				bees.total++;//adding one to bees.total
+				bees["bee"+(bees.total)] = {//creating a variable for the bees array and giving it properties
+			 		"image":new Image(),
+			 		"centreX": canvas.width*0.75,//setting the value of the bee
+			 		"centreY": canvas.height*0.35,//setting the value of the bee
+			 		"speedX": 4,//setting the speed for the bee on the x axis
+			 		"speedY": 2,//setting the speed for the bee on the y axis
+			 		"maxSpeed": 5,//setting the maximum speed that the bee can go
+			 		"transparency":1,//setting the transparency value for the bee. 1 means that the bee is fully visable
+			 		"timer":900,//setting the value of the timer to 15 seconds. Once the timer starts (see code below) it will count down from 900 to 0 and then fade out
+			 		"boundaryX": {//setting the properties for the boundary - x axis
+					"min": 0,//the minimum value the boundary can be on the y axis is 0
+					"max": canvas.width,//the maximum value the boundary can be on the x axis is the value of width of the canvas
+				},
+				"boundaryY":{//setting the properties for the boundary - y axis
+					"min": 0,//the minimum value the boundary can be on the y axis is 0
+					"max": canvas.height,//the maximum value the boundary can be on the y axis is the value of the height of the canvas
+				}
+			 	}
+
+			 	bees["bee"+(bees.total)].image.src = "bee.svg";
+				console.log(bees);//writing the bees varaible in the window browser to see if the variable works
+
+			};
+
+
+			//referenced from https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image
+			var beeImage = new Image();//creating a new image called 'beeImage'
+			beeImage.src = "bee.svg";//setting the source for 'beeImage'
+
+			var beeHive = new Image();
+			beeHive.src = "beeHive.svg";
+
+
+
+
+
+			//creating random boundaries that keep changing that appear within the canvas (there has been a boundary created below that appears on the edges of the canvas) When the bee touches the boundaries if will apeear to 'bounce' off and a new randomly created set of boundaries is created and so on. The boundaries are attatched to each bee so each bee has it's own boundaries
+			//boundaies referenced from the code examples found on blackboard html5canvas, ch5, CH5EX4.html
+			//math.random and math.floor referenced from https://www.w3schools.com/jsref/jsref_random.asp
+			//if statements referenced from https://www.w3schools.com/js/js_if_else.asp
+			function changeBoundaries(bee) {
+				if (bee.centreX - bee.boundaryX.min >= bee.boundaryX.max - bee.centreX) {
+					bee.boundaryX.min = Math.floor(Math.random() * (canvas.width / 2));//using Math.random to create a random number for the x axis
+				} else {
+					bee.boundaryX.max = (canvas.width / 2) + Math.floor(Math.random() * (canvas.width / 2));
+				}
+				if (bee.centreY - bee.boundaryY.min >= bee.boundaryY.max - bee.centreY) {//using Math.random to create a random number for the y axis
+					bee.boundaryY.min = Math.floor(Math.random() * (canvas.height / 2));
+				} else {
+					bee.boundaryY.max = (canvas.height / 2) + Math.floor(Math.random() * (canvas.height / 2));
+				}
+			}
+
+			// code refrenced from https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_webstorage_local_clickcount
+
+			//event listeners for buttons
+			document.getElementById("buttonOne").addEventListener("click", Session1); // get the session 1 button and when clicked run the function session 1
+
+			function Session1() { // create function session 1
+    		if(typeof(Storage) !== "undefined") { // if local storage is supported in the browser.
+	        if (localStorage.session1ButtonClicked) { // if the session one button is clicked
+	            localStorage.session1ButtonClicked = Number(localStorage.session1ButtonClicked)+1; // store the button click  in the local storage and add one to the current value
+	        } else { // if button isint pressed
+	            localStorage.session1ButtonClicked = 1; // show the current value that is stored inside the local storage
+	        }
+    }
+}
+
+			function animate(){//creating a function called 'animate'
+				ctx.clearRect(0,0,canvas.width,canvas.height);//clearing the canvas
+				// ctx.rect(scene.boundaryX.min, scene.boundaryY.min, scene.boundaryX.max, scene.boundaryY.max); //using this to draw a rectangle to show the boundaries to see if they are working
+				// ctx.stroke();//drawing the rectangle
+				//for loop referencded from https://www.w3schools.com/js/js_loop_for.asp
+				ctx.drawImage(beeHive,0,0,canvas.width,canvas.height);//drawing the image of the hive
+				//referenced by https://www.w3schools.com/graphics/canvas_text.asp
+			  //font of name
+			  ctx.font = "40px Calibri";
+			  ctx.fillStyle = "black";
+			  ctx.fillText("Total Attendance: " + localStorage.session1ButtonClicked,canvas.width*0.4,canvas.height*0.9);
+				for (var i=1; i<= bees.total; i++){//creating a for loop to loop through the bees array
+					var currentBee = bees["bee"+i];
+				if(currentBee.timer>= 0){//if the timer is greater than 0 then the following code will be ran. Basically if the timer is greater than 0 the animation will run
+					// console.log(currentBee.timer);//writing the timer varaible in the window browser to see if the timer works and it count downs from 900 to 0
+					ctx.save();//saving the state of the canvas
+					//Used https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_globalalpha for transparency on images
+					ctx.globalAlpha = currentBee.transparency;//returning the value of the transparancy of the bee
+					ctx.drawImage(currentBee.image,currentBee.centreX,currentBee.centreY, canvas.width / 30, canvas.width / 30);//drawing the image of the bee and then scaling the size of the bee
+					ctx.restore();//restoring the state of the anvas to the previous state
+				}
+					//creating boundaries for the canvas so that the bee cannot go outside of the canvas. Also been created are random boundaries to make the bee movement appear more random (see 'changeBoundaries' function). When the bee touches the boundaries if will apeear to 'bounce' off
+					if (currentBee.centreX + currentBee.speedX < currentBee.boundaryX.min || currentBee.centreY + currentBee.speedY < currentBee.boundaryY.min) {
+						// bee.speedX = -bee.speedX;
+						currentBee.speedX = 1 +Math.floor(Math.random()*currentBee.maxSpeed);
+						// bee.speedY = -bee.speedY;
+						currentBee.speedY = 1 +Math.floor(Math.random()*currentBee.maxSpeed);
+						currentBee.image.src = "bee.svg";
+						changeBoundaries(currentBee);
+					}else if (currentBee.centreX + currentBee.speedX > currentBee.boundaryX.max || currentBee.centreY + currentBee.speedY > currentBee.boundaryY.max){ //(|| means or)
+						currentBee.speedX =  -1 - Math.floor(Math.random()*currentBee.maxSpeed);
+						currentBee.speedY = -1 - Math.floor(Math.random()*currentBee.maxSpeed);
+						currentBee.image.src = "beeLeft.svg";
+						changeBoundaries(currentBee);
+					}
+
+					//if the timer reaches 0 then the timer will be 'reset' and the image will not be transparent
+					if(currentBee.timer == 0){
+						currentBee.transparency = 1;
+					}
+					// //changing the transparency of the bee image after a set amount of time
+					if(currentBee.timer < 180){
+						console.log(currentBee.timer);
+						currentBee.transparency -= 1/180
+					}
+					if (currentBee.timer <= 900 && currentBee.timer >= 0){
+						currentBee.timer--;//decreaing the value of the timer
+					}
+					//Used https://www.w3schools.com/js/js_operators.asp to look at the different operators to find the one that is needed. Setting the speed for the bee
+					currentBee.centreX += currentBee.speedX;//same as saying bee.centreX = beecentreX + bee.speedX
+					currentBee.centreY +=currentBee.speedY;
+					
+
+					// NOTE TO SELF - IF THE BEE POS IS OUTSIDE OF BOUNDARY THEN CHANGE SPEED AND MAKE IT GO TO CENTRE - WRAP ANIMATE IF IN AN IF (IF WILL SAY - IF THE BEE POS IS OUTSIDE OF BOUNDARY THEN CHANGE SPEED AND MAKE IT GO TO CENTRE ELSE RANDOM SHIZZ)
+				}
+			}
+			setInterval(animate, 1000/60);//setInterval is a method that is used to call a function and runs the function after a certain amount of time. In this instance the animate function is being called every so many miliseconds. This animates the bee
+
+			function btnClick(){//Creating a function called btnClick. Once the button has been clicked then the incrememtor will increase by one, the newBeeFunction will be called which will create a new bee
+				newBeeFunction(); // when the button is also pressed call the newBeeFunction to show a bee coming out of the hive.
+			}
+			document.getElementById('buttonOne').addEventListener("click",btnClick); // get the Bee button and when the button is clicked run the function btnClick
+
+	};
+
+</script>
+
+</head>
+<body>
+	<canvas id="bee"></canvas><!--Creating a canvas element and giving it a width and a height-->
+
+	<button Id="buttonOne">Session 1</button> <!-- create session 1 button-->
+</body>
+</html>

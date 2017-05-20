@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Bee Path To A Flower</title>
+	<style type="text/css">
+		canvas {border:1px solid black;}/*setting the styling for the canvas*/
+		canvas {background: url('flowerSession.svg');
+		background-size: 100%,100%;  
+		background-repeat: no-repeat;
+	}
+		#buttonOne, #buttonTwo, #buttonThree, #buttonFour, #buttonFive, #buttonReset{ /* setting the style and positioning of the buttons*/
+		padding: 15px 32px;
+		font-size: 16px; 
+		margin: 4px 2px; 
+		float:left;
+	}
+
+	#session1CurrentValue, #session2CurrentValue, #session3CurrentValue, #session4CurrentValue, #session5CurrentValue{/*setting the positioning */
+		float:left;}
+	</style>
+	<script type="text/javascript">
+
+		var beesTotal = 0;//creating a variable called beesTotal
+		var bees = {"total":0,};//creating a variable called bees
+		//These variables are being used in the bees array
+
+		window.onload = function (){//creating a 'window.onload' function so the JavaScript code will be ran once the page has been loaded
+		//referenced from the code examples found on blackboard html5canvas, ch5, CH5EX11.html
+			var canvas = document.getElementById('bee');
+			var ctx = canvas.getContext('2d');
+			//this code works out the proportion of the bee compared to the canvas
+			canvas.height = canvas.width / 1.4;
+			//working out width and height of canvas size
+			canvas.width = window.innerWidth;//creating a varaible to store the value for the width of the canvas
+			canvas.height = window.innerHeight;//creating a variable to store the value for the height of the canvas
+			//event listeners for buttons
+			document.getElementById("buttonOne").addEventListener("click", Session1); // get the session 1 button and when clicked run the function session 1
+
+			function Session1() { // create function session 1
+		    if(typeof(Storage) !== "undefined") { // if local storage is supported in the browser.
+		        if (localStorage.session1ButtonClicked) { // if the session one button is clicked
+		            localStorage.session1ButtonClicked = Number(localStorage.session1ButtonClicked)+1; // store the button click  in the local storage and add one to the current value
+		        } else { // if button isint pressed
+		            localStorage.session1ButtonClicked = 1; // show the current value that is stored inside the local storage
+		        }
+		    }
+		}
+
+			document.getElementById("buttonTwo").addEventListener("click", Session2);// get the session 2 button and when clicked run the function session 2
+				function Session2() { // create function session 2
+				    if(typeof(Storage) !== "undefined") {  // if local storage is supported in the browser.
+				        if (localStorage.session2ButtonClicked) { // if the session two button is clicked
+				            localStorage.session2ButtonClicked = Number(localStorage.session2ButtonClicked)+1; // store the button click  in the local storage and add one to the current value
+				        } else { // if button isint pressed
+				            localStorage.session2ButtonClicked = 1; // show the current value that is stored inside the local storage
+				        }
+				    }
+			    }
+
+
+		    document.getElementById("buttonThree").addEventListener("click", Session3);// get the session 3 button and when clicked run the function session 3
+				function Session3() { // create function session 3
+				    if(typeof(Storage) !== "undefined") { // if local storage is supported in the browser.
+				        if (localStorage.session3ButtonClicked) { // if the session three button is clicked
+				            localStorage.session3ButtonClicked = Number(localStorage.session3ButtonClicked)+1; // store the button click  in the local storage and add one to the current value
+				        } else { // if button isint pressed
+				            localStorage.session3ButtonClicked = 1; // show the current value that is stored inside the local storage
+				        }
+				    }
+			    }
+
+
+		    document.getElementById("buttonFour").addEventListener("click", Session4);// get the session 4 button and when clicked run the function session 4
+
+				function Session4() { // create function session 4
+				    if(typeof(Storage) !== "undefined") { // if local storage is supported in the browser.
+				        if (localStorage.session4ButtonClicked) { //  if the session four button is clicked
+				            localStorage.session4ButtonClicked = Number(localStorage.session4ButtonClicked)+1; // store the button click  in the local storage and add one to the current value
+				        } else { // if button isint pressed
+				            localStorage.session4ButtonClicked = 1; // show the current value that is stored inside the local storage
+				        }
+				    }
+			    }
+
+
+		    document.getElementById("buttonFive").addEventListener("click", Session5);// get the session 5 button and when clicked run the function session 5
+				function Session5() { // create function session 5
+				    if(typeof(Storage) !== "undefined") {  // if local storage is supported in the browser.
+				        if (localStorage.session5ButtonClicked) { //  if the session five button is clicked
+				            localStorage.session5ButtonClicked = Number(localStorage.session5ButtonClicked)+1;  // store the button click in the local storage and add one to the current value
+				        } else { // if button isint pressed
+				            localStorage.session5ButtonClicked = 1; // show the current value that is stored inside the local storage
+				        }
+				    }
+			    }
+
+			    document.getElementById("buttonReset").addEventListener("click", reset);// get the reset button and when clicked run the function reset
+			    function reset() { // create a function called reset
+				  localStorage.clear(); // if the reset button is pressed then clear any of the values inside of the local storage.
+				}
+
+				// code refrenced from https://www.w3schools.com/html/tryit.asp?filename=tryhtml5_webstorage_local_clickcount
+
+
+			//Used https://www.w3schools.com/js/js_properties.asp to look at the syntax for adding multiple properties to a variable
+			function newBeeFunction(buttonNo){//creating a function called 'newBeeFunction'. In this function an array is being created to hold all the values for the bees - https://www.w3schools.com/js/js_arrays.asp was used to look at how to create an array
+					bees.total++;//adding one to bees.total
+					bees["bee"+(bees.total)] = {//creating a variable for the bee and giving it properties
+			 		"src":"beeLeft.svg",//setting the source for the bee image
+			 		"transparency":1,//setting the transparency value for the bee. 1 means that the bee is fully visable
+			 		"timer":150,//setting the value of the timer to 3 seconds. Once the timer starts (see code below) it will count down from 900 to 0 and then fade out
+			 		"point0": {//setting the properties for the curve for the path on the x and y axis - point0
+					"x":canvas.width*0.69,//value of the point on the x axis
+					"y":canvas.height*0.3,//value of the point on the y axis
+				},
+			 		"point1": {//setting the properties for the curve for the path on the x and y axis - point1
+					"x":canvas.width*0.5,//value of the point on the x axis
+					"y":canvas.height*0.47,//value of the point on the y axis
+				},//these point values have been assigned to each bee because these points do not change along the path. See the if statement below which has been created for the points that do need to change for each bee depending on which button has been pressed
+				"travelPosition":0,//setting the position of the bee along the path. 0 means that the bee is starting at the start point of the path
+				"speed":0.01,//setting the speed for the bee
+			 	}
+			 	
+			 	//an if statement which changes the value of point2 and point3 when a certain session button has been pressed. This enables the bee to follow different paths to land on the different flowers
+				if(buttonNo===1){//if button 1 has been pressed
+					bees["bee"+(bees.total)].point2 = {//setting the properties for the curve for the path on the x and y axis - point2
+					"x":canvas.width*0.07,//value of the point on the x axis
+					"y":canvas.height*0.4,//value of the point on the y axis
+				};
+				bees["bee"+(bees.total)].point3 = {//setting the properties for the curve for the path on the x and y axis - point3
+					"x":canvas.width*0.036,//value of the point on the x axis
+					"y":canvas.height*0.4,//value of the point on the y axis
+				};}
+				else if (buttonNo===2){//if button 2 has been pressed
+					bees["bee"+(bees.total)].point2 = {//setting the properties for the curve for the path on the x and y axis - point2
+					"x":canvas.width*0.5,//value of the point on the x axis
+					"y":canvas.height*0.4,//value of the point on the y axis
+				};
+				bees["bee"+(bees.total)].point3 = {//setting the properties for the curve for the path on the x and y axis - point3
+					"x":canvas.width*0.12,//value of the point on the x axis
+					"y":canvas.height*0.4,//value of the point on the y axis
+				};}
+				else if(buttonNo===3){//if button 3 has been pressed
+					bees["bee"+(bees.total)].point2 = {//setting the properties for the curve for the path on the x and y axis - point2
+					"x":canvas.width*0.2,//value of the point on the x axis
+					"y":canvas.height*0.4,//value of the point on the y axis
+				};
+				bees["bee"+(bees.total)].point3 = {//setting the properties for the curve for the path on the x and y axis - point3
+					"x":canvas.width*0.2,//value of the point on the x axis
+					"y":canvas.height*0.4,//value of the point on the y axis
+				};}
+				else if(buttonNo===4){//if button 4 has been pressed
+					bees["bee"+(bees.total)].point2 = {//setting the properties for the curve for the path on the x and y axis - point2
+					"x":canvas.width*0.5,//value of the point on the x axis
+					"y":canvas.height*0.4,//value of the point on the y axis
+				};
+				bees["bee"+(bees.total)].point3 = {//setting the properties for the curve for the path on the x and y axis - point3
+					"x":canvas.width*0.27,//value of the point on the x axis
+					"y":canvas.height*0.4,//value of the point on the y axis
+				};}
+				else if(buttonNo===5){//if button 5 has been pressed
+					bees["bee"+(bees.total)].point2 = {//setting the properties for the curve for the path on the x and y axis - point2
+					"x":canvas.width*0.5,//value of the point on the x axis
+					"y":canvas.height*0.4,//value of the point on the y axis
+				};
+				bees["bee"+(bees.total)].point3 = {//setting the properties for the curve for the path on the x and y axis - point3
+					"x":canvas.width*0.35,//value of the point on the x axis
+					"y":canvas.height*0.4,//value of the point on the y axis
+				};}
+
+
+				console.log(bees);//writing the bees varaible in the window browser to see if the variable works
+
+			};
+
+
+			//creating the hive and bee images inside the canvas. Referenced from https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image
+			var beeImage = new Image();//creating a new image called 'beeImage'
+			beeImage.src = "beeLeft.svg";//setting the source for 'beeImage'
+
+			var beeHive = new Image();
+			beeHive.src = "beeHive.svg";
+
+
+
+
+
+			//creating function animation for bee to flow a path
+			function bee(){
+			ctx.clearRect(0, 0, canvas.width, canvas.height);//clears whole of canvas
+			ctx.drawImage(beeHive, 0, 0, canvas.width, canvas.height);//drawing the hive image within the canvas
+
+			ctx.font = "20px Calibri";
+		  	ctx.fillStyle = "white";
+		  	ctx.fillText(localStorage.session1ButtonClicked,canvas.width*0.056,canvas.height*0.78);
+
+		  	ctx.font = "20px Calibri";
+		  	ctx.fillStyle = "white";
+		  	ctx.fillText(localStorage.session2ButtonClicked,canvas.width*0.134,canvas.height*0.78);
+
+		  	ctx.font = "20px Calibri";
+		  	ctx.fillStyle = "white";
+		  	ctx.fillText(localStorage.session3ButtonClicked,canvas.width*0.21,canvas.height*0.78);
+
+		  	ctx.font = "20px Calibri";
+		  	ctx.fillStyle = "white";
+		  	ctx.fillText(localStorage.session4ButtonClicked,canvas.width*0.287,canvas.height*0.78);
+
+		  	ctx.font = "20px Calibri";
+		  	ctx.fillStyle = "white";
+		  	ctx.fillText(localStorage.session5ButtonClicked,canvas.width*0.362,canvas.height*0.78);
+
+			//for loop referencded from https://www.w3schools.com/js/js_loop_for.asp
+			for (var i=1; i<= bees.total; i++){//creating a for loop to loop through the bees array
+				var currentBee = bees["bee" + i];
+
+
+
+			//start point of the curve path x value
+			currentBee.curveX = 3 * (currentBee.point1.x - currentBee.point0.x);
+			//the x value of the bezier curve on the second curve
+			currentBee.bezierX = 3 * (currentBee.point2.x - currentBee.point1.x) - currentBee.curveX;
+			//the start position of the path for the bee to follow x value
+			currentBee.startPositionX = currentBee.point3.x - currentBee.point0.x - currentBee.curveX - currentBee.bezierX;
+
+			//start point of the curve path y value
+			currentBee.curveY = 3 * (currentBee.point1.y - currentBee.point0.y);
+			//the y value of the bezier curve on the second curve
+			currentBee.bezierY = 3 * (currentBee.point2.y - currentBee.point1.y) - currentBee.curveY;
+			//the start position of the path for the bee to follow y value
+			currentBee.startPositionY = currentBee.point3.y - currentBee.point0.y - currentBee.curveY - currentBee.bezierY;
+
+			//this is x value of travel along the path
+			currentBee.xtravel = currentBee.startPositionX*(currentBee.travelPosition*currentBee.travelPosition*currentBee.travelPosition) + currentBee.bezierX*(currentBee.travelPosition*currentBee.travelPosition) + currentBee.curveX*currentBee.travelPosition + currentBee.point0.x;
+			//this is y value of travel along the path
+			currentBee.ytravel = currentBee.startPositionY*(currentBee.travelPosition*currentBee.travelPosition*currentBee.travelPosition) + currentBee.bezierY*(currentBee.travelPosition*currentBee.travelPosition) + currentBee.curveY*currentBee.travelPosition + currentBee.point0.y;
+
+			//the speed the bee will travel along the path
+			currentBee.travelPosition += currentBee.speed;
+
+			//the if statement adjusts the speed to stop at the end point
+			if (currentBee.travelPosition > 1){
+				currentBee.travelPosition = 1;
+
+			}
+				currentBee.timer--;
+				if(currentBee.timer<=0){//this if statement changes the transparency of the bee once the timer has reached 0
+				currentBee.transparency -= 1/100;
+				if(currentBee.transparency<0){
+					currentBee.transparency=0;
+				}
+				console.log(currentBee.transparency);//writing the currentBees varaible and the transparency property of the variable in the window browser to see if the variable works
+				}
+			ctx.save();//saving the state of the canvas
+			ctx.globalAlpha = currentBee.transparency;//returning the value of the transparancy of the bee
+			//draws the bee image inside the canvas
+			ctx.drawImage(beeImage, currentBee.xtravel, currentBee.ytravel, canvas.width / 30, canvas.width / 30);
+			ctx.restore();//restoring the state of the anvas to the previous state
+
+		}
+		}
+		setInterval(bee,33);//setInterval is a method that is used to call a function and runs the function after a certain amount of time. In this instance the animate function is being called every 33 miliseconds. This animates the bee
+
+
+
+
+			function buttonOne(){ // create function buttonOne
+				newBeeFunction(1);
+				//this shows the animation but setting how many times the function is called
+			}
+
+			document.getElementById('buttonOne').addEventListener("click",buttonOne); // when the first button is clicked run the buttonOne function which a bee comes out of the hive and lands on the first flower which represents Session1
+
+			function buttonTwo(){ // create function buttonTwo
+				newBeeFunction(2); // calls seccond part of the function where a bee comes out of the hive and moves and lands on seccond flower
+			}
+
+			document.getElementById('buttonTwo').addEventListener("click",buttonTwo); // when the seccond button is clicked run the buttonTwo function which a bee comes out of the hive and lands on the seccond flower which represents Session2
+
+			function buttonThree(){ // create function buttonThree
+				newBeeFunction(3); // calls third part of the function where a bee comes out of the hive and moves and lands on third flower
+			}
+
+			document.getElementById('buttonThree').addEventListener("click",buttonThree); // when the third button is clicked run the buttonThree function which a bee comes out of the hive and lands on the third flower which represents Session3
+
+			function buttonFour(){ // create function buttonFour
+				newBeeFunction(4); // calls fourth part of the function where a bee comes out of the hive and moves and lands on fourth flower
+			}
+
+			document.getElementById('buttonFour').addEventListener("click",buttonFour); // when the fourth button is clicked run the buttonFour function which a bee comes out of the hive and lands on the fourth flower which represents Session4
+
+			function buttonFive(){ // create function buttonFive
+				newBeeFunction(5); // calls fifth part of the function where a bee comes out of the hive and moves and lands on fifth flower
+			}
+
+			document.getElementById('buttonFive').addEventListener("click",buttonFive); // when the fifth button is clicked run the buttonFive function which a bee comes out of the hive and lands on the fifth flower which represents Session5
+	}
+
+
+	</script>
+
+
+	<canvas id="bee" width="800" height="600"></canvas><!--Creating a canvas element and giving it a width and a height-->
+
+	<div id="buttons">
+	<button Id="buttonOne">Session 1</button> <!-- create session 1 button-->
+
+
+	<button id="buttonTwo">Session 2</button> <!-- create session 2 button-->
+
+
+	<button id="buttonThree">Session 3</button> <!-- create session 3 button-->
+
+
+	<button id="buttonFour">Session 4</button> <!-- create session 4 button-->
+
+
+	<button id="buttonFive">Session 5</button> <!-- create session 5 button-->
+
+	<button id="buttonReset">Reset</button> <!-- create resetbutton-->
+	</div>
+	
+
+</body>
+</html>
